@@ -58,7 +58,9 @@ void Navigation(vector<Node> & , vector<Edge> & , vector<Node> & , vector<Edge> 
 void Inquire(Node , vector<Node> , vector <Edge> );                                                                             //查询系统
 void NavigationInOneCampus(vector<Node> & , vector<Edge> & , Node & );                                                          //单独校区内物理位置导航
 void NavigationInTwoCampus(vector<Node> & , vector<Edge> & , vector<Node> & , vector<Edge> & , Node & );                        //跨校区物理位置导航
-void ShortestPath(int ,int , int ,double * ,int * , vector<Edge> );                                                             //计算最短距离
+void ShortestPath(int , int , int , double * , int * , vector<Edge> );                                                          //计算最短距离
+void ShortestTime(int , int , int , double * , int * , vector<Edge> );                                                          //计算最短时间
+void ShortestBicycle(int , int , int , double * , int * , vector<Edge> );                                                       //交通工具最短路径
 bool StrCompare(string , string );
 
 #endif /* main_hpp */

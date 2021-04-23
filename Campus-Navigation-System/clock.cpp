@@ -13,7 +13,6 @@ void Clock::SetTime(int newH, int newM, int newS) //设置时间
     minute = newM;
     second = newS;
 }
-
 void Clock::ShowTime()        //显示时间，在显示时间前进行判断，如果时间设置不合适，则提示错误
 {
     if (hour > 24 || hour<0 || minute>60 || minute<0 || second>60 || second < 0)
@@ -49,6 +48,6 @@ void Clock::Run()  //实现计时功能
             hour -= 24;
         }
         ShowTime();
-        usleep(1000000);
+        usleep(1000);
     }
 }

@@ -49,11 +49,18 @@ void Navigation(vector<Node> & node_one, vector<Edge> & edge_one, vector<Node> &
                     break;
             }
         }
+	printf("**************导航系统**************\n");
+        printf("**      输入1进入单校区导航系统   **\n");
+        printf("**      输入2进入多校区导航系统   **\n");
+        printf("**          输入0退出系统         **\n");
+        printf("************************************\n");
         printf("请输入：");
     }
 }
 
 void NavigationInOneCampus(vector<Node> & node, vector<Edge> & edge, Node & user) {
+    string tactics;
+    int tactics_flag;
     int num_node, num_edge;
     num_node = int(node.size());
     num_edge = int(edge.size());
@@ -64,34 +71,121 @@ void NavigationInOneCampus(vector<Node> & node, vector<Edge> & edge, Node & user
         if (i % 5 == 0) cout << endl;
     }
     if (node.size() - 1 % 5) cout << endl;
-    string str1, str2;
-    cout << "请输入起点：";
-    cin >> str1;
-    cout << "请输入终点：";
-    cin >> str2;
-    int u = -1, v = -1;
-    for (int i = 0; i < num_node; i ++) {
-        if (cmp(str1, node[i].name)) u = i;
-        if (cmp(str2, node[i].name)) v = i;
+    printf("**************导航策略**************\n");
+    printf("**        输入1最短路径策略       **\n");
+    printf("**        输入2最短时间策略       **\n");
+    printf("**        输入3途径最短策略       **\n");
+    printf("**        输入4交通工具策略       **\n");
+    printf("************************************\n");
+    printf("请输入：");
+    while(cin >> tactics) {
+        if (tactics.length() == 1) {
+            if (tactics[0] == '1' || tactics[0] == '2' || tactics[0] == '3' || tactics[0] == '4') {
+                tactics_flag = int(tactics[0] - '0');
+                break;
+            }
+        }
+        printf("非法输入！\n");
+        printf("**************导航策略**************\n");
+        printf("**        输入1最短路径策略       **\n");
+        printf("**        输入2最短时间策略       **\n");
+        printf("**        输入3途径最短策略       **\n");
+        printf("**        输入4交通工具策略       **\n");
+        printf("************************************\n");
+        printf("请输入：");
     }
-    ShortestPath(num_node, num_edge, u, min_dis, pre, edge);
-    if (v > 0 && v < node.size()) {
-        stack<int> path;
-        while(v && v != u) {
-            path.push(v);
-            v = pre[v];
+    if (tactics_flag == 1) {
+        string start, end;
+        cout << "请输入起点：";
+        cin >> start;
+        cout << "请输入终点：";
+        cin >> end;
+        int u = -1, v = -1;
+        for (int i = 0; i < num_node; i ++) {
+            if (cmp(start, node[i].name)) u = i;
+            if (cmp(end, node[i].name)) v = i;
         }
-        cout << node[u].name;
-        while (!path.empty()) {
-            int next;
-            next = path.top(); path.pop();
-            cout << " -> " << node[next].name;
+        ShortestPath(num_node, num_edge, u, min_dis, pre, edge);
+        if (v > 0 && v < node.size()) {
+            stack<int> path;
+            while(v && v != u) {
+                path.push(v);
+                v = pre[v];
+            }
+            cout << node[u].name;
+            while (!path.empty()) {
+                int next;
+                next = path.top(); path.pop();
+                cout << " -> " << node[next].name;
+            }
+            cout << endl;
         }
-        cout << endl;
+        else {
+            cout << "不存在的目的地!" << endl;
+        }
+    }
+    else if (tactics_flag == 2) {
+        string start, end;
+        cout << "请输入起点：";
+        cin >> start;
+        cout << "请输入终点：";
+        cin >> end;
+        int u = -1, v = -1;
+        for (int i = 0; i < num_node; i ++) {
+            if (cmp(start, node[i].name)) u = i;
+            if (cmp(end, node[i].name)) v = i;
+        }
+        ShortestTime(num_node, num_edge, u, min_dis, pre, edge);
+        if (v > 0 && v < node.size()) {
+            stack<int> path;
+            while(v && v != u) {
+                path.push(v);
+                v = pre[v];
+            }
+            cout << node[u].name;
+            while (!path.empty()) {
+                int next;
+                next = path.top(); path.pop();
+                cout << " -> " << node[next].name;
+            }
+            cout << endl;
+        }
+        else {
+            cout << "不存在的目的地!" << endl;
+        }
+    }
+    else if (tactics_flag == 3) {
+        
     }
     else {
-        cout << "不存在的目的地!" << endl;
-        cout << "退出导航系统" << endl;
+        string start, end;
+        cout << "请输入起点：";
+        cin >> start;
+        cout << "请输入终点：";
+        cin >> end;
+        int u = -1, v = -1;
+        for (int i = 0; i < num_node; i ++) {
+            if (cmp(start, node[i].name)) u = i;
+            if (cmp(end, node[i].name)) v = i;
+        }
+        ShortestBicycle(num_node, num_edge, u, min_dis, pre, edge);
+        if (v > 0 && v < node.size()) {
+            stack<int> path;
+            while(v && v != u) {
+                path.push(v);
+                v = pre[v];
+            }
+            cout << node[u].name;
+            while (!path.empty()) {
+                int next;
+                next = path.top(); path.pop();
+                cout << " -> " << node[next].name;
+            }
+            cout << endl;
+        }
+        else {
+            cout << "不存在的目的地!" << endl;
+        }
     }
     return ;
 }
