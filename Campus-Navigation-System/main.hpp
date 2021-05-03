@@ -61,6 +61,7 @@ void NavigationInTwoCampus(vector<Node> & , vector<Edge> & , vector<Node> & , ve
 void ShortestPath(int , int , int , double * , int * , vector<Edge> );                                                          //计算最短距离
 void ShortestTime(int , int , int , double * , int * , vector<Edge> );                                                          //计算最短时间
 void ShortestBicycle(int , int , int , double * , int * , vector<Edge> );                                                       //交通工具最短路径
+void ShortestMultiplePath(int , vector<int> , int [][300], vector<int> & );                                                     //多终点导航策略
 bool StrCompare(string , string );
 
 #endif /* main_hpp */
